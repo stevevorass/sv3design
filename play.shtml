@@ -9,6 +9,7 @@
   <!-- KEEP YOUR EXISTING <style> BLOCK -->
 </head>
 <body>
+ <h1>header here</h1> 
 <!--#include virtual="/partials/header.shtml" -->
 
 <!-- PAGE-SPECIFIC CONTENT -->

@@ -466,6 +466,7 @@
         .right {
             animation-delay: 0.4s;
         }
+
     </style>
 </head>
 <body>
@@ -481,7 +482,7 @@
             <div class="content">
                 <p class="description">Design. Develop. Deploy.</p>
                 <div class="cta">
-                    <a href="work.html">See My Work</a>
+                    <a href="work.shtml">See My Work</a>
                 </div>
             </div>
         </div>
