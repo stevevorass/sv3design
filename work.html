@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Steve Vorass | Creative Developer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="My passion is rooted in music translated with art and code.">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css'>
+  <style>
+    @font-face {
+      font-family: 'Satoshi';
+      src: url('https://moussamamadou.github.io/flip-plugin-horizontal-scroll/fonts/Satoshi-Variable.ttf') format('truetype');
+      font-weight: 300 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Generalsans';
+      src: url('https://moussamamadou.github.io/flip-plugin-horizontal-scroll/fonts/GeneralSans-Variable.ttf') format('truetype');
+      font-weight: 200 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    body {
+      color: #fff;
+      background: url('images/work.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Satoshi, sans-serif;
+      font-size: .9rem;
+      line-height: 1em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Monitor Frame */
+    .monitor-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90vw;
+      max-width: 1400px;
+      z-index: 1;
+    }
+
+    .monitor {
+      position: relative;
+      background: linear-gradient(180deg, #2a2a3a 0%, #1a1a28 100%);
+      border-radius: clamp(12px, 2vw, 24px);
+      padding: clamp(8px, 1.5vw, 16px) !important;
+      padding-bottom: 0;
+      box-shadow: 
+        0 50px 100px rgba(0,0,0,0.5),
+        0 30px 60px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    .monitor::before {
+      content: '';
+      position: absolute;
+      top: clamp(4px, 0.8vw, 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: clamp(6px, 1vw, 12px);
+      height: clamp(6px, 1vw, 12px);
+      background: #333;
+      border-radius: 50%;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+    }
+
+    .monitor-screen {
+      position: relative;
+      background: #0a0a12;
+      border-radius: clamp(6px, 1vw, 12px);
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
+    }
+
+    /* .monitor-stand {
+      width: 25%;
+      height: clamp(30px, 5vw, 60px);
+      margin: 0 auto;
+      background: linear-gradient(180deg, #1a1a28 0%, #2a2a3a 100%);
+      clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+    } */
+
+    /* .monitor-base {
+      width: 35%;
+      height: clamp(6px, 1vw, 12px);
+      margin: 0 auto;
+      background: linear-gradient(180deg, #333 0%, #222 100%);
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    } */
+
+    /* Carousel */
+    .carousel {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-track {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .carousel-slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      padding: clamp(10px, 3vw, 40px);
+    }
+
+    .carousel-slide.is-active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Media container - responsive sizing */
+    .slide-media {
+      max-width: 100%;
+      max-height: 100%;
+      display: flex;
+      align-items: normal;
+      justify-content: center;
+      border-radius: clamp(4px, 0.8vw, 10px);
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .slide-media img,
+    .slide-media video {
+      max-width: 100%;
+      max-height: calc(100vh * 0.75);
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      border-radius: clamp(4px, 0.8vw, 10px);
+    }
+
+    .slide-media video {
+      pointer-events: none;
+    }
+
+    /* Hide video controls on all browsers */
+    .slide-media video::-webkit-media-controls {
+      display: none !important;
+    }
+    .slide-media video::-webkit-media-controls-enclosure {
+      display: none !important;
+    }
+    .slide-media video::-webkit-media-controls-panel {
+      display: none !important;
+    }
+
+    /* Navigation Arrows */
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 20;
+      width: clamp(36px, 5vw, 60px);
+      height: clamp(36px, 5vw, 60px);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .carousel-nav:hover {
+      background: rgba(255,255,255,0.15);
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .carousel-nav:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    .carousel-nav.prev {
+      left: clamp(8px, 2vw, 24px);
+    }
+
+    .carousel-nav.next {
+      right: clamp(8px, 2vw, 24px);
+    }
+
+    .carousel-nav svg {
+      width: clamp(16px, 2vw, 24px);
+      height: clamp(16px, 2vw, 24px);
+      stroke: rgba(255,255,255,0.7);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    /* Slide Counter */
+    .slide-counter {
+      position: absolute;
+      bottom: clamp(8px, 2vw, 20px);
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: Generalsans, sans-serif;
+      font-size: clamp(0.65rem, 1.2vw, 0.85rem);
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.15em;
+    }
+
+    .slide-counter .current {
+      color: rgba(255,255,255,0.85);
+      font-weight: 600;
+    }
+
+    /* Navigation */
+    .nav {
+      z-index: 100;
+      position: fixed;
+      inset: 0% 0% auto;
+    }
+
+    .nav_top-wrapper {
+      z-index: 2;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 1rem clamp(1rem, 3vw, 2rem);
+      display: flex;
+      position: relative;
+    }
+
+    .nav_top {
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      display: flex;
+      position: relative;
+    }
+
+    .nav_link {
+      color: #fff;
+      font-family: Generalsans, Tahoma, sans-serif;
+      font-size: clamp(0.65rem, 1.5vw, 0.85rem);
+      text-decoration: none;
+      overflow: hidden;
+      opacity: 0.75;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav_link:hover {
+      opacity: 1;
+    }
+
+    /* Reference button */
+    .button_reference {
+      z-index: 20;
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      color: #fff;
+      background-color: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: .25rem;
+      padding: .5rem .75rem;
+      font-family: monospace;
+      font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+      line-height: 1em;
+      text-decoration: none;
+      display: flex;
+      transition: background 0.3s ease;
+    }
+
+    .button_reference:hover {
+      background-color: rgba(255,255,255,0.12);
+    }
+
+    .button_reference.fix-bottom-left {
+      position: fixed;
+      bottom: .5rem;
+      left: .5rem;
+    }
+
+    /* Dot indicators (optional, below counter) */
+    .slide-dots {
+      position: absolute;
+      bottom: clamp(24px, 4vw, 45px);
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: clamp(6px, 1vw, 10px);
+      background: rgba(0, 0, 0, .5);
+      padding: 15px 20px;
+      border-radius: 10px;
+    }
+
+    .slide-dot {
+      width: clamp(6px, 0.8vw, 10px);
+      height: clamp(6px, 0.8vw, 10px);
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .slide-dot:hover {
+      background: rgba(255,255,255,0.4);
+    }
+
+    .slide-dot.is-active {
+      background: rgba(255,255,255,0.8);
+      transform: scale(1.2);
+    }
+
+    /* Responsive adjustments */
+    @media screen and (max-width: 768px) {
+      .monitor-container {
+        width: 95vw;
+      }
+      
+      .slide-media img,
+      .slide-media video {
+        max-height: calc(100vh * 0.45);
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .carousel-slide {
+        padding: 8px;
+      }
+      
+      .carousel-nav {
+        width: 32px;
+        height: 32px;
+      }
+      
+      .carousel-nav.prev {
+        left: 4px;
+      }
+      
+      .carousel-nav.next {
+        right: 4px;
+      }
+    }
+
+    /* Landscape mobile */
+    @media screen and (max-height: 500px) and (orientation: landscape) {
+      .monitor-container {
+        width: 85vw;
+      }
+      
+      /* .monitor-stand,
+      .monitor-base {
+        display: none;
+      }
+       */
+      .slide-media img,
+      .slide-media video {
+        max-height: calc(100vh * 0.65);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<a href="https://dribbble.com/stevevorass" target="_blank" class="button_reference fix-bottom-left">
+  <div>View on <strong>Dribbble</strong></div>
+</a>
+
+<nav class="nav">
+  <div class="nav_top-wrapper">
+    <div class="nav_top">
+      <a href="/ class="nav_link">
+        <svg width="100px" height="100px" viewBox="0 0 244 121" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; overflow: visible; filter: drop-shadow(0 4px 20px rgba(255, 189, 95, 0.2));" id="animatedLogo">
+          <style>
+              .logo-main, .logo-triangle {
+                  fill: #FFBD5F;
+                  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+              }
+              .logo-main { transform-origin: 60px 60px; }
+              .logo-triangle { transform-origin: 183px 60px; }
+              
+              .arrow-chevron, .arrow-bar {
+                  fill: #FFBD5F;
+                  opacity: 0;
+                  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+              }
+              .arrow-chevron {
+                  transform: translateX(20px) scale(0.7);
+                  transform-origin: 50px 60px;
+              }
+              .arrow-bar {
+                  transform: translateX(-40px) scaleX(0.5);
+                  transform-origin: 100px 60px;
+              }
+              
+              /* Hover states */
+              #animatedLogo:hover .logo-main,
+              #animatedLogo.active .logo-main {
+                  opacity: 0;
+                  transform: translateX(-15px) scale(0.85);
+              }
+              #animatedLogo:hover .logo-triangle,
+              #animatedLogo.active .logo-triangle {
+                  opacity: 0;
+                  transform: translateX(15px) scale(0.85);
+              }
+              #animatedLogo:hover .arrow-chevron,
+              #animatedLogo.active .arrow-chevron {
+                  opacity: 1;
+                  transform: translateX(0) scale(1);
+              }
+              #animatedLogo:hover .arrow-bar,
+              #animatedLogo.active .arrow-bar {
+                  opacity: 1;
+                  transform: translateX(0) scaleX(1);
+              }
+          </style>
+          
+          <!-- Original Logo -->
+          <path class="logo-main" d="M5.5,116.1l27.8-55.6c-7.7,0-14.3-2.7-19.8-8c-5.4-5.5-8-12.1-8-19.8c0-7.5,2.7-14,8-19.5C19,7.7,25.6,4.9,33.3,4.9h83.4L88.9,60.5c7.5,0,14,2.8,19.5,8.3c5.5,5.5,8.3,12,8.3,19.5c0,7.7-2.8,14.3-8.3,19.8c-5.5,5.4-12,8-19.5,8H5.5z"/>
+          <path class="logo-triangle" d="M127.3,4.9h111.2l-55.6,111.2L127.3,4.9z"/>
+          
+          <!-- Back Arrow (pointing LEFT) -->
+          <path class="arrow-chevron" d="M4,60.5 L49,15 L49,42 L79,42 L79,79 L49,79 L49,106 Z"/>
+          <path class="arrow-bar" d="M70,42 L230,42 C236,42 240,47 240,53 L240,68 C240,74 236,79 230,79 L70,79 Z"/>
+          
+          <script type="text/javascript"><![CDATA[
+              (function() {
+                  var svg = document.getElementById('animatedLogo');
+                  var isActive = false;
+                  var hasHover = window.matchMedia('(hover: hover)').matches;
+                  
+                  if (!hasHover) {
+                      svg.addEventListener('click', function(e) {
+                          isActive = !isActive;
+                          svg.classList.toggle('active', isActive);
+                      });
+                  }
+                  
+                  svg.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+              })();
+          ]]></script>
+      </svg>
+      
+      </a>
+      <a href="mailto:yo@stevevorass.com" class="nav_link">CONTACT</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Monitor Frame -->
+<div class="monitor-container">
+  <div class="monitor">
+    <div class="monitor-screen">
+      <!-- Carousel -->
+      <div class="carousel">
+        <div class="carousel-track">
+          
+          <!-- Slide 1 - Image -->
+          <div class="carousel-slide is-active" data-slide="0">
+            <div class="slide-media">
+              <video src="https://cdn.dribbble.com/userupload/45233167/file/a962ed031d3f2c525e69eca44b948ee7.mp4" autoplay loop muted playsinline disablePictureInPicture></video>
+            </div>
+          </div>
+          
+          <!-- Slide 2 - Video -->
+          <div class="carousel-slide" data-slide="1">
+            <div class="slide-media">
+              <video src="https://cdn.dribbble.com/userupload/45229714/file/18f7172e91431176dbf668c8ec9b2580.mp4" autoplay loop muted playsinline disablePictureInPicture></video>
+            </div>
+          </div>
+          
+          <!-- Slide 3 - Image -->
+          <div class="carousel-slide" data-slide="2">
+            <div class="slide-media">
+              <video src="https://cdn.dribbble.com/userupload/43377580/file/original-a747d6a7f6927b350a2d71acaa43b1e0.mp4" autoplay loop muted playsinline disablePictureInPicture></video>
+            </div>
+          </div>
+          
+          <!-- Slide 4 - Image -->
+          <div class="carousel-slide" data-slide="3">
+            <div class="slide-media">
+              <video src="https://cdn.dribbble.com/userupload/18241410/file/original-ae58793774638892c69aaf72e32716b6.mp4" autoplay loop muted playsinline disablePictureInPicture></video>
+            </div>
+          </div>
+          
+          <!-- Slide 5 - Image -->
+          <div class="carousel-slide" data-slide="4">
+            <div class="slide-media">
+              <video src="https://cdn.dribbble.com/userupload/14152777/file/original-e7909bf12967764755969c6318ef5eb6.mp4" autoplay loop muted playsinline disablePictureInPicture></video>
+            </div>
+          </div>
+          
+          <!-- Slide 6 - Image -->
+          <div class="carousel-slide" data-slide="5">
+            <div class="slide-media">
+              <video src="https://cdn.dribbble.com/userupload/10132372/file/original-b5794f969f80619132e64a4da9e95b40.mp4" autoplay loop muted playsinline disablePictureInPicture></video>
+            </div>
+          </div>
+          
+          <!-- Slide 7 - Image -->
+          <div class="carousel-slide" data-slide="6">
+            <div class="slide-media">
+              <video src="https://cdn.dribbble.com/userupload/9642644/file/original-ec94fed90d3482f777c47068d99cdb53.mp4" autoplay loop muted playsinline disablePictureInPicture></video>
+            </div>
+          </div>
+          
+          <!-- Slide 8 - Image -->
+          <div class="carousel-slide" data-slide="7">
+            <div class="slide-media">
+              <video src="https://cdn.dribbble.com/userupload/9642644/file/original-ec94fed90d3482f777c47068d99cdb53.mp4" autoplay loop muted playsinline disablePictureInPicture></video>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Navigation Arrows -->
+        <button class="carousel-nav prev" aria-label="Previous slide">
+          <svg viewBox="0 0 24 24">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button class="carousel-nav next" aria-label="Next slide">
+          <svg viewBox="0 0 24 24">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+
+        <!-- Dot Indicators -->
+        <div class="slide-dots"></div>
+
+        <!-- Slide Counter -->
+        <div class="slide-counter">
+          <span class="current">01</span> / <span class="total">09</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="monitor-stand"></div> -->
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // DOM Elements
+    const slides = document.querySelectorAll('.carousel-slide');
+    const prevBtn = document.querySelector('.carousel-nav.prev');
+    const nextBtn = document.querySelector('.carousel-nav.next');
+    const currentCounter = document.querySelector('.slide-counter .current');
+    const totalCounter = document.querySelector('.slide-counter .total');
+    const dotsContainer = document.querySelector('.slide-dots');
+
+    // State
+    let currentSlide = 0;
+    let isAnimating = false;
+    const totalSlides = slides.length;
+
+    // Update total counter
+    totalCounter.textContent = String(totalSlides).padStart(2, '0');
+
+    // Create dot indicators
+    slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('slide-dot');
+        if (index === 0) dot.classList.add('is-active');
+        dot.addEventListener('click', () => goToSlide(index, index > currentSlide ? 1 : -1));
+        dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.slide-dot');
+
+    // Update counter and dots
+    function updateIndicators() {
+        currentCounter.textContent = String(currentSlide + 1).padStart(2, '0');
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('is-active', index === currentSlide);
+        });
+    }
+
+    // Handle video playback
+    function handleVideoPlayback(slideIndex, shouldPlay) {
+        const video = slides[slideIndex].querySelector('video');
+        if (video) {
+            if (shouldPlay) {
+                video.currentTime = 0;
+                video.play().catch(() => {});
+            } else {
+                video.pause();
+            }
+        }
+    }
+
+    // Go to slide
+    function goToSlide(index, direction = 1) {
+        if (isAnimating || index === currentSlide || index < 0 || index >= totalSlides) return;
+        
+        isAnimating = true;
+        const prevSlideEl = slides[currentSlide];
+        const nextSlideEl = slides[index];
+
+        // Pause video on current slide
+        handleVideoPlayback(currentSlide, false);
+
+        // Animate out current slide
+        gsap.to(prevSlideEl, {
+            opacity: 0,
+            x: direction * -60,
+            scale: 0.95,
+            duration: 0.4,
+            ease: 'power2.inOut',
+            onComplete: () => {
+                prevSlideEl.classList.remove('is-active');
+                gsap.set(prevSlideEl, { x: 0, scale: 1 });
+            }
+        });
+
+        // Animate in next slide
+        gsap.set(nextSlideEl, { opacity: 0, x: direction * 60, scale: 0.95 });
+        nextSlideEl.classList.add('is-active');
+        
+        gsap.to(nextSlideEl, {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            duration: 0.4,
+            ease: 'power2.inOut',
+            onComplete: () => {
+                isAnimating = false;
+                // Play video on new slide
+                handleVideoPlayback(index, true);
+            }
+        });
+
+        currentSlide = index;
+        updateIndicators();
+    }
+
+    // Next slide
+    function nextSlide() {
+        const next = (currentSlide + 1) % totalSlides;
+        goToSlide(next, 1);
+    }
+
+    // Previous slide
+    function prevSlide() {
+        const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+        goToSlide(prev, -1);
+    }
+
+    // Event listeners
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') prevSlide();
+        if (e.key === 'ArrowRight') nextSlide();
+    });
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const carouselTrack = document.querySelector('.carousel-track');
+    
+    carouselTrack.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    carouselTrack.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) nextSlide();
+            else prevSlide();
+        }
+    }, { passive: true });
+
+    // Auto-play first video if it exists
+    handleVideoPlayback(0, true);
+
+    console.log('Carousel initialized!');
+});
+</script>
+
+</body>
+</html>

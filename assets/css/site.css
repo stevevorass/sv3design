@@ -1,0 +1,11 @@
+body{margin:0;font-family:sans-serif;background:#0a0a0c;color:#fff;}
+.nav{position:fixed;top:0;width:100%;}
+.nav_links{display:flex;gap:1rem;}
+.mobile-menu-btn{display:none;}
+.mobile-nav{display:none;}
+.mobile-nav.is-open{display:flex;}
+.footer{padding:2rem;text-align:center;}
+@media(max-width:768px){
+  .nav_links{display:none;}
+  .mobile-menu-btn{display:block;}
+}

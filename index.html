@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Work & Play</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-display: 'Orbitron', sans-serif;
+            --text-color: rgba(245, 245, 245, 0.95);
+            --accent-work: #FFD23F;
+            --accent-play: #FFD23F;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            font-family: var(--font-mono);
+            color: var(--text-color);
+            background: #0a0a0a;
+            position: relative;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 0, 0, 0.03) 2px,
+                    rgba(0, 0, 0, 0.03) 4px
+                );
+            opacity: 0.4;
+            z-index: 1000;
+            pointer-events: none;
+            animation: grain 0.5s steps(10) infinite;
+        }
+
+        @keyframes grain {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-2%, -2%); }
+            20% { transform: translate(2%, 2%); }
+            30% { transform: translate(-2%, 2%); }
+            40% { transform: translate(2%, -2%); }
+            50% { transform: translate(-2%, 0%); }
+            60% { transform: translate(2%, 0%); }
+            70% { transform: translate(0%, -2%); }
+            80% { transform: translate(0%, 2%); }
+            90% { transform: translate(-2%, -2%); }
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        /* Single background for entire container */
+        .container::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/home.jpg');
+            background-size: cover;
+            background-position: center center;
+            transition: all 1.2s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+            z-index: 0;
+        }
+
+        /* Zoom into left side when hovering work */
+        .container.hover-left::before {
+            transform: scale(1.4);
+            background-position: 25% center;
+        }
+
+        /* Zoom into right side when hovering play */
+        .container.hover-right::before {
+            transform: scale(1.4);
+            background-position: 75% center;
+        }
+
+        /* Reset to center when switching */
+        .container.resetting::before {
+            transform: scale(1) !important;
+            background-position: center center !important;
+        }
+
+        .split {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            transition: flex 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .split::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+            transition: background 0.6s ease;
+        }
+
+        .split:hover::before {
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        .split:hover {
+            flex: 1.8;
+        }
+
+        .split:not(:hover) {
+            flex: 0.6;
+        }
+
+        .container:has(.left:hover) .right,
+        .container:has(.right:hover) .left {
+            flex: 0.6;
+        }
+
+        .content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .label {
+            font-family: var(--font-display);
+            font-size: clamp(4rem, 12vw, 10rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+            text-shadow: 
+                0 0 20px rgba(0, 0, 0, 0.8),
+                0 0 40px rgba(0, 0, 0, 0.6),
+                0 0 60px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .left .label {
+            color: var(--accent-work);
+            animation: glowWork 3s ease-in-out infinite;
+        }
+
+        .right .label {
+            color: var(--accent-play);
+            animation: glowPlay 3s ease-in-out infinite;
+        }
+
+        @keyframes glowWork {
+            0%, 100% {
+                text-shadow: 
+                    0 0 20px rgba(0, 0, 0, 0.8),
+                    0 0 40px rgba(255, 107, 53, 0.3),
+                    0 0 60px rgba(255, 107, 53, 0.2);
+            }
+            50% {
+                text-shadow: 
+                    0 0 20px rgba(0, 0, 0, 0.8),
+                    0 0 50px rgba(255, 107, 53, 0.5),
+                    0 0 80px rgba(255, 107, 53, 0.3);
+            }
+        }
+
+        @keyframes glowPlay {
+            0%, 100% {
+                text-shadow: 
+                    0 0 20px rgba(0, 0, 0, 0.8),
+                    0 0 40px rgba(255, 210, 63, 0.3),
+                    0 0 60px rgba(255, 210, 63, 0.2);
+            }
+            50% {
+                text-shadow: 
+                    0 0 20px rgba(0, 0, 0, 0.8),
+                    0 0 50px rgba(255, 210, 63, 0.5),
+                    0 0 80px rgba(255, 210, 63, 0.3);
+            }
+        }
+
+        .split:hover .label {
+            transform: translateY(-20px) scale(1.05);
+            opacity: 1;
+        }
+
+        .description {
+            font-family: var(--font-mono);
+            font-size: clamp(0.75rem, 1.5vw, 1rem);
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1.000) 0.2s;
+            max-width: 300px;
+            line-height: 1.8;
+        }
+
+        .split:hover .description {
+            opacity: 0.8;
+            transform: translateY(0);
+        }
+
+        .cta {
+            margin-top: 3rem;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1.000) 0.4s;
+        }
+
+        .split:hover .cta {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cta a,
+        .cta button {
+            font-family: var(--font-mono);
+            font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            padding: 1.2rem 3rem;
+            border: 2px solid var(--text-color);
+            background: transparent;
+            color: var(--text-color);
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+        }
+
+        .cta a::before,
+        .cta button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--text-color);
+            transition: left 0.4s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+            z-index: -1;
+        }
+
+        .cta a:hover::before,
+        .cta button:hover::before {
+            left: 0;
+        }
+
+        .cta a:hover,
+        .cta button:hover {
+            color: #0a0a0a;
+            border-color: var(--text-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .left .cta a:hover,
+        .left .cta button:hover {
+            border-color: var(--accent-work);
+        }
+
+        .left .cta a::before,
+        .left .cta button::before {
+            background: var(--accent-work);
+        }
+
+        .right .cta a:hover,
+        .right .cta button:hover {
+            border-color: var(--accent-play);
+        }
+
+        .right .cta a::before,
+        .right .cta button::before {
+            background: var(--accent-play);
+        }
+
+        /* Divider line */
+        .divider {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                rgba(245, 245, 245, 0.3) 20%,
+                rgba(245, 245, 245, 0.3) 80%,
+                transparent
+            );
+            z-index: 10;
+            transform: translateX(-50%);
+            transition: opacity 0.6s ease;
+        }
+
+        .container:has(.split:hover) .divider {
+            opacity: 0;
+        }
+
+        /* Decorative corner elements */
+        .corner-deco {
+            position: fixed;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .corner-deco.top-left {
+            top: 2rem;
+            left: 2rem;
+            width: 60px;
+            height: 60px;
+            border-top: 2px solid rgba(245, 245, 245, 0.3);
+            border-left: 2px solid rgba(245, 245, 245, 0.3);
+        }
+
+        .corner-deco.top-right {
+            top: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-top: 2px solid rgba(245, 245, 245, 0.3);
+            border-right: 2px solid rgba(245, 245, 245, 0.3);
+        }
+
+        .corner-deco.bottom-left {
+            bottom: 2rem;
+            left: 2rem;
+            width: 60px;
+            height: 60px;
+            border-bottom: 2px solid rgba(245, 245, 245, 0.3);
+            border-left: 2px solid rgba(245, 245, 245, 0.3);
+        }
+
+        .corner-deco.bottom-right {
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-bottom: 2px solid rgba(245, 245, 245, 0.3);
+            border-right: 2px solid rgba(245, 245, 245, 0.3);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .split:hover {
+                flex: 2;
+            }
+
+            /* Adjust zoom positions for mobile */
+            .container.hover-left::before {
+                background-position: center 30%;
+            }
+
+            .container.hover-right::before {
+                background-position: center 70%;
+            }
+
+            .label {
+                font-size: clamp(3rem, 15vw, 6rem);
+            }
+
+            .description {
+                font-size: 0.7rem;
+                letter-spacing: 0.2em;
+            }
+
+            .cta a,
+            .cta button {
+                font-size: 0.8rem;
+                padding: 1rem 2rem;
+            }
+
+            .corner-deco {
+                width: 40px;
+                height: 40px;
+            }
+
+            .corner-deco.top-left,
+            .corner-deco.top-right {
+                top: 1rem;
+            }
+
+            .corner-deco.bottom-left,
+            .corner-deco.bottom-right {
+                bottom: 1rem;
+            }
+
+            .corner-deco.top-left,
+            .corner-deco.bottom-left {
+                left: 1rem;
+            }
+
+            .corner-deco.top-right,
+            .corner-deco.bottom-right {
+                right: 1rem;
+            }
+        }
+
+        /* Loading animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .split {
+            animation: fadeIn 1s cubic-bezier(0.645, 0.045, 0.355, 1.000) backwards;
+        }
+
+        .left {
+            animation-delay: 0.2s;
+        }
+
+        .right {
+            animation-delay: 0.4s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative corners -->
+    <div class="corner-deco top-left"></div>
+    <div class="corner-deco top-right"></div>
+    <div class="corner-deco bottom-left"></div>
+    <div class="corner-deco bottom-right"></div>
+
+    <div class="container">
+        <!-- Left side - WORK -->
+        <div class="split left">
+            <div class="content">
+                <p class="description">Design. Develop. Deploy.</p>
+                <div class="cta">
+                    <a href="work.html">See My Work</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="divider"></div>
+
+        <!-- Right side - PLAY -->
+        <div class="split right">
+            <div class="content">
+                <p class="description">Drum. Play. Create.</p>
+                <div class="cta">
+                    <button onclick="window.location.href='play.html'">See Me Play</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const container = document.querySelector('.container');
+        const leftSplit = document.querySelector('.left');
+        const rightSplit = document.querySelector('.right');
+        
+        let currentHover = null;
+        let isResetting = false;
+        let resetTimeout = null;
+
+        function handleHover(side) {
+            // Clear any pending reset
+            if (resetTimeout) {
+                clearTimeout(resetTimeout);
+                resetTimeout = null;
+            }
+
+            // If we're switching sides, reset first
+            if (currentHover && currentHover !== side && !isResetting) {
+                isResetting = true;
+                
+                // Remove current hover class
+                container.classList.remove('hover-left', 'hover-right');
+                
+                // Add resetting class
+                container.classList.add('resetting');
+                
+                // Wait for reset animation, then apply new hover
+                resetTimeout = setTimeout(() => {
+                    container.classList.remove('resetting');
+                    container.classList.add(`hover-${side}`);
+                    currentHover = side;
+                    isResetting = false;
+                }, 800); // Give time for zoom out transition
+            } else if (!currentHover && !isResetting) {
+                // First hover
+                container.classList.add(`hover-${side}`);
+                currentHover = side;
+            }
+        }
+
+        function handleLeave() {
+            if (resetTimeout) {
+                clearTimeout(resetTimeout);
+                resetTimeout = null;
+            }
+            
+            if (!isResetting) {
+                container.classList.remove('hover-left', 'hover-right', 'resetting');
+                currentHover = null;
+            }
+        }
+
+        leftSplit.addEventListener('mouseenter', () => handleHover('left'));
+        rightSplit.addEventListener('mouseenter', () => handleHover('right'));
+        
+        // Use mouseleave on the container to prevent flickering
+        container.addEventListener('mouseleave', handleLeave);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === '1') {
+                document.querySelector('.left a').click();
+            } else if (e.key === 'ArrowRight' || e.key === '2') {
+                document.querySelector('.right button').click();
+            }
+        });
+    </script>
+</body>
+</html>

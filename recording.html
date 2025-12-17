@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steve Vorass | World-Class Drum Tracks</title>
+    <meta name="description" content="Professional remote drum sessions for artists and producers worldwide. Studio-quality tracks delivered to your inbox.">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css'>
+    <style>
+        @font-face {
+            font-family: 'Satoshi';
+            src: url('https://moussamamadou.github.io/flip-plugin-horizontal-scroll/fonts/Satoshi-Variable.ttf') format('truetype');
+            font-weight: 300 900;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Generalsans';
+            src: url('https://moussamamadou.github.io/flip-plugin-horizontal-scroll/fonts/GeneralSans-Variable.ttf') format('truetype');
+            font-weight: 200 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --primary: #FFBD5F;
+            --primary-dark: #E5A84F;
+            --primary-light: #FFD080;
+            --primary-glow: rgba(255, 189, 95, 0.4);
+            
+            --bg-darkest: #0a0a0c;
+            --bg-darker: #0f0f12;
+            --bg-dark: #18181b;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-card-solid: #1f1f23;
+            --bg-card-hover: rgba(255, 255, 255, 0.06);
+            --bg-elevated: rgba(255, 255, 255, 0.05);
+            
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --text-dim: #52525b;
+            
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-light: rgba(255, 255, 255, 0.15);
+            
+            --glass-bg: rgba(0, 0, 0, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 40px rgba(255, 189, 95, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            background: var(--bg-darkest);
+            min-height: 100vh;
+        }
+
+/* Animated Background */
+/* Animated Background */
+.bg-gradient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--bg-darkest); /* Fallback color */
+    background-image: url('images/play.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: -1; /* Changed to -1 to ensure it's behind everything */
+}
+
+.bg-gradient::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay to improve readability */
+    pointer-events: none;
+}
+
+.bg-gradient::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(255, 189, 95, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(255, 189, 95, 0.12) 0%, transparent 40%),
+        radial-gradient(ellipse 50% 30% at 50% 90%, rgba(255, 189, 95, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Generalsans', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text-primary);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s ease;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 clamp(1rem, 3vw, 2rem);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        .nav {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .nav_top-wrapper {
+            z-index: 2;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 1rem clamp(1rem, 3vw, 2rem);
+            display: flex;
+            position: relative;
+            background: linear-gradient(180deg, rgba(10, 10, 12, 0.9) 0%, transparent 100%);
+        }
+
+        .nav_top {
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1280px;
+            display: flex;
+            position: relative;
+        }
+
+        .nav_link {
+            color: #fff;
+            font-family: 'Generalsans', Tahoma, sans-serif;
+            font-size: clamp(0.65rem, 1.5vw, 0.85rem);
+            text-decoration: none;
+            overflow: hidden;
+            opacity: 0.75;
+            transition: opacity 0.3s ease;
+            letter-spacing: 0.05em;
+        }
+
+        .nav_link:hover {
+            opacity: 1;
+        }
+
+        .nav_links {
+            display: flex;
+            gap: clamp(1rem, 3vw, 2rem);
+            align-items: center;
+        }
+
+        .nav_cta {
+            background: var(--primary);
+            color: var(--bg-darkest);
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+            opacity: 1;
+            transition: all 0.3s ease;
+        }
+
+        .nav_cta:hover {
+            background: var(--primary-light);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        /* Animated Logo */
+        .logo-link {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-main, .logo-triangle {
+            fill: var(--primary);
+            transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .logo-main { transform-origin: 60px 60px; }
+        .logo-triangle { transform-origin: 183px 60px; }
+        
+        .arrow-chevron, .arrow-bar {
+            fill: var(--primary);
+            opacity: 0;
+            transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .arrow-chevron {
+            transform: translateX(20px) scale(0.7);
+            transform-origin: 50px 60px;
+        }
+        .arrow-bar {
+            transform: translateX(-40px) scaleX(0.5);
+            transform-origin: 100px 60px;
+        }
+        
+        #animatedLogo:hover .logo-main,
+        #animatedLogo.active .logo-main {
+            opacity: 0;
+            transform: translateX(-15px) scale(0.85);
+        }
+        #animatedLogo:hover .logo-triangle,
+        #animatedLogo.active .logo-triangle {
+            opacity: 0;
+            transform: translateX(15px) scale(0.85);
+        }
+        #animatedLogo:hover .arrow-chevron,
+        #animatedLogo.active .arrow-chevron {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+        }
+        #animatedLogo:hover .arrow-bar,
+        #animatedLogo.active .arrow-bar {
+            opacity: 1;
+            transform: translateX(0) scaleX(1);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            font-family: 'Satoshi', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--bg-darkest);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px var(--primary-glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(255, 189, 95, 0.05);
+        }
+
+        /* Reference Button */
+        .button_reference {
+            z-index: 20;
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            color: #fff;
+            background-color: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: .25rem;
+            padding: .5rem .75rem;
+            font-family: monospace;
+            font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+            line-height: 1em;
+            text-decoration: none;
+            display: flex;
+            transition: background 0.3s ease;
+        }
+
+        .button_reference:hover {
+            background-color: rgba(255,255,255,0.12);
+        }
+
+        .button_reference.fix-bottom-left {
+            position: fixed;
+            bottom: .5rem;
+            left: .5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 140px 0 80px;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 189, 95, 0.1);
+            border: 1px solid rgba(255, 189, 95, 0.3);
+            padding: 8px 16px;
+            border-radius: 50px;
+            color: var(--primary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.9); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            animation: fadeInUp 0.6s ease 0.1s both;
+            line-height: 1.1;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.6s ease 0.3s both;
+        }
+
+        .hero-media {
+            animation: fadeInUp 0.6s ease 0.4s both;
+        }
+
+        .hero-media .glass-card {
+            padding: 1.5rem;
+        }
+
+        .hero-media iframe {
+            border-radius: 0.5rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 100px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .feature-card {
+            padding: 32px;
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 189, 95, 0.1);
+            border: 1px solid rgba(255, 189, 95, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .feature-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--primary);
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Pricing Section */
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            align-items: start;
+        }
+
+        .pricing-card {
+            padding: 40px 32px;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--primary);
+            box-shadow: var(--shadow-glow);
+            transform: scale(1.02);
+            background: linear-gradient(180deg, rgba(255, 189, 95, 0.05) 0%, var(--glass-bg) 100%);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: var(--bg-darkest);
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .pricing-price {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            margin-bottom: 24px;
+        }
+
+        .pricing-price .currency {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .pricing-price .amount {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            font-family: 'Generalsans', sans-serif;
+        }
+
+        .pricing-price .period {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features li svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .pricing-features li svg.check {
+            stroke: #10B981;
+        }
+
+        .pricing-features li svg.x {
+            stroke: var(--text-dim);
+        }
+
+        .pricing-card .btn {
+            width: 100%;
+        }
+
+        /* How It Works */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: -20px;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary) 0%, transparent 100%);
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            color: var(--bg-darkest);
+            font-family: 'Generalsans', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            position: relative;
+            box-shadow: 0 0 30px var(--primary-glow);
+        }
+
+        .step h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+
+        .step p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Meet Steve / Listen Section */
+        .meet-steve-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .meet-steve-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+        }
+
+        .meet-steve-text p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+        }
+
+        .meet-steve-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Generalsans', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-shadow: 0 0 30px var(--primary-glow);
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .see-work-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 24px;
+            transition: gap 0.2s ease;
+        }
+
+        .see-work-link:hover {
+            gap: 12px;
+            color: var(--primary-light);
+        }
+
+        .listen-section .glass-card {
+            padding: 1.5rem;
+        }
+
+        .listen-section iframe {
+            border-radius: 0.5rem;
+        }
+
+        .listen-section h3 {
+            font-size: 1.25rem;
+            margin-bottom: 16px;
+        }
+
+        /* Events Section */
+        .events-section {
+            margin-top: 2rem;
+        }
+
+        .events-section h3 {
+            font-size: 1.25rem;
+            margin-bottom: 16px;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .testimonial-card {
+            padding: 32px;
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-stars svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--primary);
+        }
+
+        .testimonial-text {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testimonial-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .testimonial-author-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .testimonial-author-info span {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* FAQ Section */
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: 'Satoshi', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(0, 0, 0, 0.5);
+            border-color: var(--border-light);
+        }
+
+        .faq-question svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--text-muted);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .faq-question {
+            border-radius: 12px 12px 0 0;
+        }
+
+        .faq-item.active .faq-question svg {
+            transform: rotate(180deg);
+            stroke: var(--primary);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+        }
+
+        .faq-answer-content {
+            padding: 24px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+        }
+
+        /* CTA Section */
+        .cta-form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 48px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            font-family: 'Satoshi', sans-serif;
+            font-size: 1rem;
+            color: var(--text-primary);
+            background: var(--bg-elevated);
+            transition: all 0.2s ease;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-dim);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 189, 95, 0.15);
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        .form-group select option {
+            background: var(--bg-card-solid);
+            color: var(--text-primary);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            margin-top: 24px;
+        }
+
+        .form-submit .btn {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.05rem;
+        }
+
+        .form-note {
+            text-align: center;
+            margin-top: 16px;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .form-note a {
+            color: var(--primary);
+        }
+
+        .form-note a:hover {
+            color: var(--primary-light);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--text-muted);
+            padding: 60px 0 30px;
+            border-top: 1px solid var(--border-color);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand .logo-text {
+            font-family: 'Generalsans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-brand .logo-text .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-brand p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+
+        .footer h4 {
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .social-links svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--text-secondary);
+            transition: fill 0.2s ease;
+        }
+
+        .social-links a:hover svg {
+            fill: var(--bg-darkest);
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-media {
+                order: -1;
+            }
+
+            .features-grid,
+            .pricing-cards,
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 48px;
+            }
+
+            .step:nth-child(2)::after {
+                display: none;
+            }
+
+            .meet-steve-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav_links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding: 120px 0 60px;
+                min-height: auto;
+            }
+
+            .section {
+                padding: 70px 0;
+            }
+
+            .features-grid,
+            .pricing-cards,
+            .testimonials-grid,
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step::after {
+                display: none;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+                order: -1;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-form-container {
+                padding: 32px 24px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .meet-steve-stats {
+                flex-direction: column;
+                gap: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-gradient"></div>
+
+<a href="https://dribbble.com/stevevorass" target="_blank" class="button_reference fix-bottom-left">
+    <div>View on <strong>Dribbble</strong></div>
+</a>
+
+<!-- Navigation -->
+<nav class="nav">
+    <div class="nav_top-wrapper">
+        <div class="nav_top">
+            <a href="#" class="logo-link">
+                <svg width="80px" height="80px" viewBox="0 0 244 121" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; overflow: visible; filter: drop-shadow(0 4px 20px rgba(255, 189, 95, 0.2));" id="animatedLogo">
+                    <path class="logo-main" d="M5.5,116.1l27.8-55.6c-7.7,0-14.3-2.7-19.8-8c-5.4-5.5-8-12.1-8-19.8c0-7.5,2.7-14,8-19.5C19,7.7,25.6,4.9,33.3,4.9h83.4L88.9,60.5c7.5,0,14,2.8,19.5,8.3c5.5,5.5,8.3,12,8.3,19.5c0,7.7-2.8,14.3-8.3,19.8c-5.5,5.4-12,8-19.5,8H5.5z"/>
+                    <path class="logo-triangle" d="M127.3,4.9h111.2l-55.6,111.2L127.3,4.9z"/>
+                    <path class="arrow-chevron" d="M4,60.5 L49,15 L49,42 L79,42 L79,79 L49,79 L49,106 Z"/>
+                    <path class="arrow-bar" d="M70,42 L230,42 C236,42 240,47 240,53 L240,68 C240,74 236,79 230,79 L70,79 Z"/>
+                </svg>
+            </a>
+            <div class="nav_links">
+                <a href="#services" class="nav_link">SERVICES</a>
+                <a href="#pricing" class="nav_link">PRICING</a>
+                <a href="#about" class="nav_link">ABOUT</a>
+                <a href="#contact" class="nav_link nav_cta">BOOK A SESSION</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-text">
+                <span class="hero-badge">Professional Remote Drum Sessions</span>
+                <h1>World-Class <span>Drum Tracks</span> Delivered to Your Studio</h1>
+                <p>Get professional, studio-quality drum tracks for your songs. From subtle brush work to powerful rock grooves, I deliver custom drum recordings tailored to your music.</p>
+                <div class="hero-buttons">
+                    <a href="#pricing" class="btn btn-primary">View Pricing</a>
+                    <a href="#contact" class="btn btn-outline">Book a Demo</a>
+                </div>
+            </div>
+            <div class="hero-media">
+                <div class="glass-card">
+                    <iframe src="https://open.spotify.com/embed/playlist/2257HvAHZWnV61nYGlEvTQ" width="100%" height="352" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Section -->
+<section class="section" id="services">
+    <div class="container">
+        <div class="section-header">
+            <h2>Why Choose Remote Drum Sessions?</h2>
+            <p>Get professional drum tracks without the hassle of booking studio time, equipment rental, and coordinating schedules.</p>
+        </div>
+        <div class="features-grid">
+            <div class="glass-card feature-card">
+                <div class="feature-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                </div>
+                <h3>Fast Turnaround</h3>
+                <p>Get your tracks back within 48-72 hours. Rush delivery available for time-sensitive projects.</p>
+            </div>
+            <div class="glass-card feature-card">
+                <div class="feature-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                    </svg>
+                </div>
+                <h3>Professional Studio</h3>
+                <p>Recorded in a world-class studio with premium microphones, preamps, and acoustic treatment.</p>
+            </div>
+            <div class="glass-card feature-card">
+                <div class="feature-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                </div>
+                <h3>Unlimited Revisions</h3>
+                <p>Not quite right? I'll make revisions until you're completely satisfied with the final result.</p>
+            </div>
+            <div class="glass-card feature-card">
+                <div class="feature-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+                    </svg>
+                </div>
+                <h3>Genre Versatility</h3>
+                <p>From jazz brushes to metal blast beats, I bring authentic style and feel to any genre.</p>
+            </div>
+            <div class="glass-card feature-card">
+                <div class="feature-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/>
+                    </svg>
+                </div>
+                <h3>Multi-Track Stems</h3>
+                <p>Receive individual stems for kick, snare, toms, hi-hat, overheads, and room mics for full mixing control.</p>
+            </div>
+            <div class="glass-card feature-card">
+                <div class="feature-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <h3>Cost Effective</h3>
+                <p>Save on studio costs, session fees, and equipment rental. Get pro quality at a fraction of the price.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Section -->
+<section class="section" id="pricing">
+    <div class="container">
+        <div class="section-header">
+            <h2>Pricing Packages</h2>
+            <p>Choose the package that fits your project. All packages include professional mixing.</p>
+        </div>
+        <div class="pricing-cards">
+            <div class="glass-card pricing-card">
+                <h3>Basic</h3>
+                <div class="pricing-price">
+                    <span class="currency">$</span>
+                    <span class="amount">150</span>
+                    <span class="period">/song</span>
+                </div>
+                <ul class="pricing-features">
+                    <li>
+                        <svg class="check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        1 song up to 5 minutes
+                    </li>
+                    <li>
+                        <svg class="check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        Stereo drum mix
+                    </li>
+                    <li>
+                        <svg class="check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        2 revisions included
+                    </li>
+                    <li>
+                        <svg class="x" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                        Multi-track stems
+                    </li>
+                    <li>
+                        <svg class="x" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                        Priority delivery
+                    </li>
+                </ul>
+                <a href="#contact" class="btn btn-primary">Get Started</a>
+            </div>
+            <div class="glass-card pricing-card featured">
+                <span class="pricing-badge">Most Popular</span>
+                <h3>Standard</h3>
+                <div class="pricing-price">
+                    <span class="currency">$</span>
+                    <span class="amount">250</span>
+                    <span class="period">/song</span>
+                </div>
+                <ul class="pricing-features">
+                    <li>
+                        <svg class="check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        1 song up to 7 minutes
+                    </li>
+                    <li>
+                        <svg class="check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        Multi-track stems + stereo mix
+                    </li>
+                    <li>
+                        <svg class="check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        Unlimited revisions
+                    </li>
+                    <li>
+                        <svg class="check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        48-hour delivery
+                    </li>
+                    <li>
+                        <svg class="x" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                        Video session
+                    </li>
+                </ul>
+                <a href="#contact" class="btn btn-primary">Get Started</a>
+            </div>
+            <div class="glass-card pricing-card">
+                <h3>Premium</h3>
+                <div class="pricing-price">
+                    <span class="currency">$</span>
+                    <span class="amount">350</span>
+                    <span class="period">/song</span>
+                </div>
+                <ul class="pricing-features">
+                    <li>
+                        <svg class="check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        1 song any length
+                    </li>
+                    <li>
+                        <svg class="check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        Full multi-track stems
+                    </li>
+                    <li>
+                        <svg class="check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        Unlimited revisions
+                    </li>
+                    <li>
+                        <svg class="check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        24-hour priority delivery
+                    </li>
+                    <li>
+                        <svg class="check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        Live video session
+                    </li>
+                </ul>
+                <a href="#contact" class="btn btn-primary">Get Started</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2>How It Works</h2>
+            <p>A simple, streamlined process from start to finish.</p>
+        </div>
+        <div class="steps-grid">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Send Your Song</h3>
+                <p>Upload your song with any reference tracks and notes about the style you're looking for.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Review & Confirm</h3>
+                <p>We'll discuss your vision, confirm details, and finalize the creative direction.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Recording + Iteration</h3>
+                <p>I record the drums and send you the files. Request revisions until it's perfect.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Receive & Review</h3>
+                <p>Get your final multi-track stems and stereo mix, ready for your production.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Meet Steve / Listen Section -->
+<section class="section listen-section" id="about">
+    <div class="container">
+        <div class="meet-steve-content">
+            <div class="meet-steve-text">
+                <h2>Meet Steve Vorass</h2>
+                <p>With over 20 years of experience as a session drummer, I've had the privilege of working with artists and producers across every genre imaginable—from indie rock to orchestral film scores, jazz fusion to heavy metal.</p>
+                <p>I've recorded drums for hundreds of tracks for artists and labels across the globe, with credits including work on billboard charting albums, Netflix series soundtracks, and indie releases.</p>
+                <p>My goal with every session is to serve the song. Whether you need subtle, in-the-pocket grooves or explosive, technical performances, I bring the same level of dedication and musicality to every project that lands in my studio.</p>
+                <div class="meet-steve-stats">
+                    <div class="stat">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Songs Recorded</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                </div>
+                <a href="#" class="see-work-link">
+                    See my portfolio and listen
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+            <div>
+                <div class="glass-card">
+                    <h3>🎧 Listen to My Work</h3>
+                    <iframe src="https://open.spotify.com/embed/playlist/2257HvAHZWnV61nYGlEvTQ" width="100%" height="352" frameborder="0" allowtransparency="true" allow="encrypted-media" style="border-radius: 0.5rem;"></iframe>
+                </div>
+                
+                <div class="events-section">
+                    <div class="glass-card">
+                        <h3>📅 Upcoming Shows</h3>
+                        <script charset="utf-8" src="https://widgetv3.bandsintown.com/main.min.js"></script>
+                        <a class="bit-widget-initializer"
+                            data-artist-name="id_15325893"
+                            data-events-to-display=""
+                            data-background-color="rgba(0,0,0,0)"
+                            data-separator-color="rgba(255,255,255,0.1)"
+                            data-text-color="rgba(255,255,255,0.8)"
+                            data-font="Helvetica"
+                            data-auto-style="true"
+                            data-button-label-capitalization="capitalize"
+                            data-header-capitalization="uppercase"
+                            data-location-capitalization="capitalize"
+                            data-venue-capitalization="capitalize"
+                            data-display-local-dates="true"
+                            data-local-dates-position="tab"
+                            data-display-past-dates="true"
+                            data-display-details="false"
+                            data-display-lineup="false"
+                            data-display-start-time="false"
+                            data-social-share-icon="true"
+                            data-display-limit="all"
+                            data-date-format="MMM. D, YYYY"
+                            data-date-orientation="horizontal"
+                            data-date-border-color="rgba(255,189,95,0.3)"
+                            data-date-border-width="1px"
+                            data-date-capitalization="capitalize"
+                            data-date-border-radius="10px"
+                            data-event-ticket-cta-size="medium"
+                            data-event-custom-ticket-text=""
+                            data-event-ticket-text="TICKETS"
+                            data-event-ticket-icon="false"
+                            data-event-ticket-cta-text-color="#0a0a0c"
+                            data-event-ticket-cta-bg-color="#FFBD5F"
+                            data-event-ticket-cta-border-color="#FFBD5F"
+                            data-event-ticket-cta-border-width="0px"
+                            data-event-ticket-cta-border-radius="4px"
+                            data-sold-out-button-text-color="#FFFFFF"
+                            data-sold-out-button-background-color="#4A4A4A"
+                            data-sold-out-button-border-color="#4A4A4A"
+                            data-sold-out-button-clickable="true"
+                            data-event-rsvp-position="left"
+                            data-event-rsvp-cta-size="medium"
+                            data-event-rsvp-only-show-icon="false"
+                            data-event-rsvp-text="REMIND ME"
+                            data-event-rsvp-icon="false"
+                            data-event-rsvp-cta-text-color="#FFBD5F"
+                            data-event-rsvp-cta-bg-color="transparent"
+                            data-event-rsvp-cta-border-color="#FFBD5F"
+                            data-event-rsvp-cta-border-width="1px"
+                            data-event-rsvp-cta-border-radius="4px"
+                            data-follow-section-position="top"
+                            data-follow-section-alignment="center"
+                            data-follow-section-header-text="Get updates on new shows, new music, and more."
+                            data-follow-section-cta-size="medium"
+                            data-follow-section-cta-text="FOLLOW"
+                            data-follow-section-cta-icon="true"
+                            data-follow-section-cta-text-color="#0a0a0c"
+                            data-follow-section-cta-bg-color="#FFBD5F"
+                            data-follow-section-cta-border-color="#FFBD5F"
+                            data-follow-section-cta-border-width="0px"
+                            data-follow-section-cta-border-radius="4px"
+                            data-play-my-city-position="bottom"
+                            data-play-my-city-alignment="Center"
+                            data-play-my-city-header-text="Don't see a show near you?"
+                            data-play-my-city-cta-size="medium"
+                            data-play-my-city-cta-text="REQUEST A SHOW"
+                            data-play-my-city-cta-icon="true"
+                            data-play-my-city-cta-text-color="#FFFFFF"
+                            data-play-my-city-cta-bg-color="rgba(255,255,255,0.1)"
+                            data-play-my-city-cta-border-color="rgba(255,255,255,0.2)"
+                            data-play-my-city-cta-border-width="1px"
+                            data-play-my-city-cta-border-radius="4px"
+                            data-language="en"
+                            data-layout-breakpoint="900"
+                            data-app-id="bc5582c79acb784f1ddff67ff3506925"
+                            data-bit-logo-position="bottomRight"
+                            data-bit-logo-color="rgba(255,255,255,0.5)"
+                        ></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2>What Artists Say</h2>
+            <p>Hear from musicians and producers who've worked with me.</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="glass-card testimonial-card">
+                <div class="testimonial-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <p class="testimonial-text">"Steve nailed the vibe on the first take. His attention to detail and musicality elevated our entire album. Can't recommend him enough!"</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">MR</div>
+                    <div class="testimonial-author-info">
+                        <h4>Marcus Rodriguez</h4>
+                        <span>Indie Rock Artist</span>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-card testimonial-card">
+                <div class="testimonial-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <p class="testimonial-text">"Working with Steve was seamless. He understood exactly what we needed for our film score and delivered professional tracks that exceeded expectations."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">JL</div>
+                    <div class="testimonial-author-info">
+                        <h4>Jennifer Liu</h4>
+                        <span>Film Composer</span>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-card testimonial-card">
+                <div class="testimonial-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <p class="testimonial-text">"Incredible drummer with killer tone. Steve brought the perfect energy to our metal tracks. The multi-track stems made mixing a breeze."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">DK</div>
+                    <div class="testimonial-author-info">
+                        <h4>David Kim</h4>
+                        <span>Metal Producer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item">
+                <button class="faq-question">
+                    What file formats do you accept?
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        I accept WAV, AIFF, MP3, and most common audio formats. For best results, please send your files at 44.1kHz/24-bit or higher. I can work with your existing project tempo and time signature.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    What do you need to get started?
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        All I need is your song (even a rough demo works), the tempo/BPM, and any reference tracks or notes about the drum style you're envisioning. The more detail you provide, the better I can match your vision.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    Can you work with odd time signatures and complex arrangements?
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Absolutely! I love challenging material. Whether it's prog rock in 7/8, jazz fusion polyrhythms, or complex arrangement changes, I've got you covered. Feel free to send me your most intricate compositions.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    What drum kit and cymbals do you have available?
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        My studio features a collection of premium drums including vintage Ludwig, Gretsch, and modern DW kits. I have a wide selection of snares, cymbals (Zildjian, Meinl, Sabian), and percussion instruments to match any sonic palette.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    Do you offer refunds?
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        My priority is your satisfaction. I offer unlimited revisions to ensure the drums are exactly what you need. If for any reason we can't achieve what you're looking for, I'll work with you to find a fair solution.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section" id="contact">
+    <div class="container">
+        <div class="section-header">
+            <h2>Ready to Get Started?</h2>
+            <p>Let's discuss your project and make your music come to life.</p>
+        </div>
+        <div class="glass-card cta-form-container">
+            <form id="contact-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="John Smith" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="package">Package</label>
+                    <select id="package" name="package">
+                        <option value="">Select a package</option>
+                        <option value="basic">Basic - $150/song</option>
+                        <option value="standard">Standard - $250/song</option>
+                        <option value="premium">Premium - $350/song</option>
+                        <option value="custom">Custom Project</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Tell me about your project..."></textarea>
+                </div>
+                <div class="form-submit">
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </div>
+                <p class="form-note">By submitting, you agree to our <a href="#">Privacy Policy</a></p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo-text">
+                    <div class="logo-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="10" stroke="#0a0a0c" stroke-width="2"/>
+                            <circle cx="12" cy="12" r="4" fill="#0a0a0c"/>
+                        </svg>
+                    </div>
+                    Steve Vorass
+                </div>
+                <p>Professional remote drum sessions for artists and producers worldwide. Studio-quality tracks delivered to your inbox.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Portfolio</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Gear List</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Follow</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="#" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <a href="https://dribbble.com/stevevorass" target="_blank" aria-label="Dribbble">
+                        <svg viewBox="0 0 24 24"><path d="M12 24C5.385 24 0 18.615 0 12S5.385 0 12 0s12 5.385 12 12-5.385 12-12 12zm10.12-10.358c-.35-.11-3.17-.953-6.384-.438 1.34 3.684 1.887 6.684 1.992 7.308 2.3-1.555 3.936-4.02 4.395-6.87zm-6.115 7.808c-.153-.9-.75-4.032-2.19-7.77l-.066.02c-5.79 2.015-7.86 6.025-8.04 6.4 1.73 1.358 3.92 2.166 6.29 2.166 1.42 0 2.77-.29 4-.814zm-11.62-2.58c.232-.4 3.045-5.055 8.332-6.765.135-.045.27-.084.405-.12-.26-.585-.54-1.167-.832-1.74C7.17 11.775 2.206 11.71 1.756 11.7l-.004.312c0 2.633.998 5.037 2.634 6.855zm-2.42-8.955c.46.008 4.683.026 9.477-1.248-1.698-3.018-3.53-5.558-3.8-5.928-2.868 1.35-5.01 3.99-5.676 7.17zM9.6 2.052c.282.38 2.145 2.914 3.822 6 3.645-1.365 5.19-3.44 5.373-3.702-1.81-1.61-4.19-2.586-6.795-2.586-.825 0-1.63.1-2.4.285zm10.335 3.483c-.218.29-1.935 2.493-5.724 4.04.24.49.47.985.68 1.486.08.18.15.36.22.53 3.41-.428 6.8.265 7.14.335-.02-2.42-.88-4.64-2.31-6.39z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Steve Vorass. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Animated Logo interaction for touch devices
+    (function() {
+        var svg = document.getElementById('animatedLogo');
+        var isActive = false;
+        var hasHover = window.matchMedia('(hover: hover)').matches;
+        
+        if (!hasHover) {
+            svg.addEventListener('click', function(e) {
+                isActive = !isActive;
+                svg.classList.toggle('active', isActive);
+            });
+        }
+        
+        svg.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+    })();
+
+    // FAQ accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            faqItems.forEach(i => i.classList.remove('active'));
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+
+    // Form submission
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Thank you for your message! Steve will get back to you within 24 hours.');
+        form.reset();
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav_links');
+    
+    if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+    }
+</script>
+
+</body>
+</html>
